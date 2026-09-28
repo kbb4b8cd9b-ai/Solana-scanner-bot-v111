@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: solana-risk-scanner-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SOLANA_RPC_URL
+        value: https://api.mainnet-beta.solana.com
+      - key: FRONTEND_ORIGINS
+        value: https://kbb4b8cd9b-ai.github.io
+      - key: DATABASE_URL
+        value: sqlite:///./risk_scanner.db
+      - key: ALERT_THRESHOLD
+        value: "75"
